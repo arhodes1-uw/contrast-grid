@@ -124,7 +124,7 @@
   function buildTableTds(xAxisData, compareColor) {
     return xAxisData.map(data => {
       return `
-        <td tabindex="0" role="button" style="
+        <td tabindex="0" role="button" class="contrast-result" style="
             --color-1: ${ tinycolor(data.color).toHexString() };
             --color-2: ${ tinycolor(compareColor).toHexString() };
             --hover-text-color: ${ tinycolor.mostReadable(data.color, ["#fff", "#000"]).toHexString() };
@@ -175,7 +175,7 @@
    */
   function buildTable(xAxisData, yAxisData) {
     return `
-      <table>
+      <table id="results">
         ${ buildHeaderRow(xAxisData) }
         ${ buildDataRows(xAxisData, yAxisData) }
       </table>

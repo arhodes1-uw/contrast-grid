@@ -85,11 +85,33 @@
       </div>
     </div>
   </main>
+    <div id="log" style="width: 75%;margin: auto;"></div>
   <footer>
     <p>The code for this website is available at <a href="https://github.com/mherchel/contrast-grid">https://github.com/mherchel/contrast-grid</a>.</p>
     <p>The concept of this site is inspired by <a href="https://contrast-grid.eightshapes.com/">Eightshapes' Contrast Grid </a>, as well as <a href="https://metageeky.github.io/contrast_table_analyzer/contrast-table.html">Kate Deibel's Contrast Table Analyzer</a>.</p>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" referrerpolicy="no-referrer"></script>
   <script src="/js/tinycolor-min.js"></script>
   <script src="/js/scripts.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#log').append('Best results...');
+      $('.contrast-result').each(function() {
+        var contrast =  $(this).html() * 1;
+        var index = $(this).index() * 1;
+        index -= 1;
+        if ( contrast > 7 ) {
+
+          var color1 = $(this).parent().children().first().text().trim();
+          var color2 = $('#results tbody tr:eq(0) th:eq('+index+')').text().trim();
+
+          var output = "\n"+'<p style="padding: 0.5rem; margin: 0.75rem; color:'+color1;
+          output += ';background-color:'+color2+';">color: '+color1+"; background-color: "+color2+";</p>";
+          $('#log').append(output);
+
+        }
+      });
+    });
+  </script>
 </body>
 </html>
