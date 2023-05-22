@@ -7,6 +7,7 @@
    *  - {String} color - valid color
    *  - {String} [name] - optional name for the color
    */
+
   function getInputData(string) {
     const inputArray = string.split('\n');
     const outputArray = [];
@@ -261,6 +262,7 @@
     e.preventDefault(); // Don't reload the page.
 
     writeTableToDOM(xAxisData, yAxisData);
+    getBestResults();
   }
 
   /**
@@ -327,6 +329,28 @@
     }
   }
 
+  function getBestResults() {
+    var results = $('.contrast-result');
+    if( results.length > 0 )  {
+      $('#log').append('Best results...');
+      results.each(function() {
+        var contrast =  $(this).html() * 1;
+        var index = $(this).index() * 1;
+        index -= 1;
+        if ( contrast > 7 ) {
+
+          var color1 = $(this).parent().children().first().text().trim();
+          var color2 = $('#results tbody tr:eq(0) th:eq('+index+')').text().trim();
+
+          var output = "\n"+'<p style="padding: 0.5rem; margin: 0.75rem; color:'+color1;
+          output += ';background-color:'+color2+';">color: '+color1+"; background-color: "+color2+";</p>";
+          $('#log').append(output);
+
+        }
+      });
+    }
+  }
+
   /**
    * Initialize everything.
    */
@@ -350,4 +374,5 @@
 
   // Lets do this!
   init();
+  getBestResults();
 })(tinycolor);
