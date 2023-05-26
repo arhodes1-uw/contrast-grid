@@ -332,6 +332,7 @@
   function getBestResults() {
     var results = $('.contrast-result');
     if( results.length > 0 )  {
+      $('#log').html('');
       $('#log').append('Best results...');
       results.each(function() {
         var contrast =  $(this).html() * 1;
@@ -370,6 +371,8 @@
 
     hydrateForm(form, xAxisData, yAxisData);
     writeTableToDOM(xAxisData, yAxisData);
+
+
   }
 
   // Lets do this!
